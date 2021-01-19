@@ -7,7 +7,6 @@ const { handleError } = require("./services/errorHandler");
 
 const app = express();
 
-
 app.use(cookieParser());
 
 app.use(
