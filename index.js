@@ -1,5 +1,6 @@
 const fs = require("fs");
 const http = require("http");
+const webSocket = require('ws');
 // const https = require("https");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
@@ -11,7 +12,30 @@ const app = require("./app");
 // const httpsServer = https.createServer(credentials, app);
 const httpServer = http.createServer(app);
 
-console.log( process.env.DATABASE );
+const ws = new WebSocket.Server({ httpServer });
+
+ws.on('message', (message) => {
+
+    //log the received message and send it back to the client
+    console.log('received: %s', message);
+
+    const broadcastRegex = /^broadcast\:/;
+
+    if (broadcastRegex.test(message)) {
+        message = message.replace(broadcastRegex, '');
+
+        //send back the message to the other clients
+        ws.clients
+            .forEach(client => {
+                if (client !== ws) {
+                    client.send(`Hello, broadcast message -> ${message}`);
+                }
+            });
+
+    } else {
+        ws.send(`Hello, you sent -> ${message}`);
+    }
+});
 
 const mongooseConnect = async() => {
     try {
