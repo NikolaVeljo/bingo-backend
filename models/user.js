@@ -1,4 +1,3 @@
-const asyncHandler = require("../services/asyncHandler");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const validator = require("validator");
@@ -33,6 +32,36 @@ const userSchema = new Schema({
         maxlength: 22,
         select: false,
     },
+    role: {
+        type: String,
+        enum: ["user", "developer", "admin"],
+        default: "user",
+    },
+    confirmed: {
+        type: Boolean,
+        default: false,
+    },
+    active: {
+        type: Boolean,
+        default: true,
+        select: false,
+    },
+    passwordChangedAt: {
+        type: Date,
+        select: false,
+    },
+    folders: [{
+        type: Schema.ObjectId,
+        ref: 'Folder'
+    }],
+    records: [{
+        type: Schema.ObjectId,
+        ref: 'Record'
+    }],
+},{
+    toJSON: {
+        virtuals: true,
+    },
 });
 
 userSchema.pre("save", async function(next) {
@@ -40,6 +69,7 @@ userSchema.pre("save", async function(next) {
         if (this.isModified("password") || this.isNew) {
             const salt = await bcrypt.genSalt(10);
             this.password = await bcrypt.hash(this.password, salt);
+            this.passwordChangedAt = Date.now() - 30000;
             next();
         } else {
             next();

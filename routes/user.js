@@ -1,11 +1,13 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const singupController = require('../controllers/user/singup');
-const singinController = require('../controllers/user/singin');
-const statusController = require('../controllers/user/status');
+const authHandler = require("../middlewares/authHandler");
+const authController = require("../controllers/auth");
+const profileController = require("../controllers/profile");
 
-router.post('/signup', singupController);
-router.post('/signin', singinController);
-router.get('/status', statusController);
+router.post("/sign-up", authController.signUp);
+router.post("/sign-in", authController.signIn);
+router.get("/sign-out", authController.signOut);
+
+router.get("/profile", profileController.profile);
 
 module.exports = router;
