@@ -26,7 +26,10 @@ const signIn = asyncHandler(async (req, res) => {
 	const csrf = crypto.randomBytes(36).toString("hex");
 
 	req.session.uid = user._id;
+	req.session.username = user.username;
 	req.session.csrf = csrf;
+	req.session.confirmed = user.confirmed;
+	req.session.role = user.role;
 
 	res.status(200).json({
 		username: user.username,
@@ -90,8 +93,18 @@ const signOut = (req, res) => {
 	res.json("you are logged out");
 };
 
+const getUser = asyncHandler(async (req, res) => {
+	res.status(200).json({
+		username: req.session.username,
+		csrf: req.session.csrf,
+		confirmed: req.session.confirmed,
+		role: req.session.role,
+	});
+});
+
 module.exports = {
 	signIn,
 	signOut,
 	signUp,
+	getUser,
 };
