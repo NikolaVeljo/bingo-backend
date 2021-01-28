@@ -15,6 +15,9 @@ const authHandler = asyncHandler(async (req, res, next) => {
 	) {
 		throw new ErrorHandler(401, "Unauthorized");
 	}
+
+	req.session.touch();
+
 	next();
 });
 
