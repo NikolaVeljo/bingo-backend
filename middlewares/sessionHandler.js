@@ -10,7 +10,7 @@ const sessionObject = {
 	}),
 	name: "session",
 	domain: process.env.NODE_ENV === "production" ? process.env.COOKIE_DOMAIN : "",
-	secret: proccess.env.REDIS_SECRET,
+	secret: process.env.REDIS_SECRET,
 	saveUninitialized: false,
 	resave: false,
 	rolling: true,
