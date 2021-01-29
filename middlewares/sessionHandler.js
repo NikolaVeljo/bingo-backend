@@ -5,8 +5,7 @@ const redisClient = require("../db/redis");
 const RedisStore = connectRedis(session);
 
 console.log( process.env.NODE_ENV )
-
-const sessionHandler = session({
+const sessionObject = {
 	store: new RedisStore({
 		client: redisClient,
 	}),
@@ -20,6 +19,8 @@ const sessionHandler = session({
 		httpOnly: true,
 		maxAge: 1000 * 60 * 30,
 	},
-});
+}
+
+const sessionHandler = session(sessionObject);
 
 module.exports = sessionHandler;
