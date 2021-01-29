@@ -9,10 +9,11 @@ const sessionHandler = session({
 		client: redisClient,
 	}),
 	name: "session",
-	secret: "secret",
+	secret: process.env.REDIS_SECRET,
 	saveUninitialized: false,
 	resave: false,
 	cookie: {
+		domain: process.env.NODE_ENV === "production" ? process.env.WEBSITE : '',
 		secure: true,
 		httpOnly: true,
 		maxAge: 1000 * 60 * 30,
