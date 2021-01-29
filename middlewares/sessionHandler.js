@@ -4,7 +4,7 @@ const redisClient = require("../db/redis");
 
 const RedisStore = connectRedis(session);
 
-const sessionObject = {
+const sessionHandler = session({
 	store: new RedisStore({
 		client: redisClient,
 	}),
@@ -18,8 +18,6 @@ const sessionObject = {
 		httpOnly: true,
 		maxAge: 1000 * 60 * 30,
 	},
-};
-
-const sessionHandler = session(sessionObject);
+});
 
 module.exports = sessionHandler;
