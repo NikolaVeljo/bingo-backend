@@ -9,12 +9,12 @@ const sessionObject = {
 		client: redisClient,
 	}),
 	name: "session",
-	domain: process.env.NODE_ENV === "production" ? process.env.COOKIE_DOMAIN : "",
 	secret: process.env.REDIS_SECRET,
 	saveUninitialized: false,
 	resave: false,
 	rolling: true,
 	cookie: {
+		domain: process.env.NODE_ENV === "production" ? process.env.COOKIE_DOMAIN : "",
 		secure: process.env.NODE_ENV === "production" ? true : false,
 		httpOnly: true,
 		maxAge: 1000 * 60 * 30,

@@ -13,7 +13,6 @@ const authHandler = asyncHandler(async (req, res, next) => {
 			req.session.csrf === csrf
 		)
 	) {
-		console.log('unauthorizedddddd')
 		throw new ErrorHandler(401, "Unauthorized");
 	}
 
