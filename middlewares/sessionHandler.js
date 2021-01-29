@@ -4,6 +4,8 @@ const redisClient = require("../db/redis");
 
 const RedisStore = connectRedis(session);
 
+console.log( process.env.NODE_ENV )
+
 const sessionHandler = session({
 	store: new RedisStore({
 		client: redisClient,
