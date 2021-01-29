@@ -12,8 +12,8 @@ const sessionObject = {
 	secret: "4cf9b676033e152d51caeba321",
 	saveUninitialized: false,
 	resave: false,
-	rolling: true,
 	cookie: {
+		rolling: true,
 		secure: true,
 		httpOnly: true,
 		maxAge: 1000 * 60 * 30,
