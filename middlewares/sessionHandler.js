@@ -9,7 +9,7 @@ const sessionObject = {
 		client: redisClient,
 	}),
 	name: "session",
-	secret: process.env.REDIS_SECRET,
+	secret: "4cf9b676033e152d51caeba321",
 	saveUninitialized: false,
 	resave: false,
 	rolling: true,
