@@ -4,7 +4,6 @@ const redisClient = require("../db/redis");
 
 const RedisStore = connectRedis(session);
 
-console.log( process.env.NODE_ENV )
 const sessionObject = {
 	store: new RedisStore({
 		client: redisClient,
@@ -13,6 +12,7 @@ const sessionObject = {
 	secret:process.env.REDIS_SECRET,
 	saveUninitialized: false,
 	resave: false,
+	rolling: true,
 	cookie: {
 		domain: process.env.NODE_ENV === "production" ? process.env.COOKIE_DOMAIN : '',
 		secure: true,

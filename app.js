@@ -6,11 +6,18 @@ const cors = require('cors');
 
 const app = express();
 
-// if you run behind a proxy ( e.g. kubernates, ngix)
 if ( process.env.NODE_ENV === 'production'){
-	app.set('trust proxy', 1)
+	app.set('trust proxy', 1);
 }
 
+app.use(
+    cors({
+        origin: [
+			process.env.NODE_ENV === "production" ? process.env.WEBSITE : 'http://localhost:3000',
+        ],
+        credentials: true,
+    })
+);
 
 app.use(express.json());
 app.use(sessionHandler);
