@@ -10,11 +10,11 @@ const sessionObject = {
 		client: redisClient,
 	}),
 	name: "session",
-	secret: process.env.REDIS_SECRET,
+	secret:"47b4ec7e244a545d98663ff64fcdf949a760e6acf9b676033e152d51caeba320",
 	saveUninitialized: false,
 	resave: false,
 	cookie: {
-		domain: process.env.NODE_ENV === "production" ? process.env.WEBSITE : '',
+		domain: "https://bingo-frontend-iku9k.ondigitalocean.app",
 		secure: true,
 		httpOnly: true,
 		maxAge: 1000 * 60 * 30,
