@@ -9,22 +9,17 @@ const sessionObject = {
 		client: redisClient,
 	}),
 	name: "session",
-	// domain: process.env.NODE_ENV === "production" ? process.env.COOKIE_DOMAIN : "",
+	domain: process.env.NODE_ENV === "production" ? process.env.COOKIE_DOMAIN : "",
 	secret: proccess.env.REDIS_SECRET,
 	saveUninitialized: false,
 	resave: false,
 	rolling: true,
 	cookie: {
-		secure: false,
+		secure: process.env.NODE_ENV === "production" ? true : false,
 		httpOnly: true,
 		maxAge: 1000 * 60 * 30,
 	},
 };
-
-if (process.env.NODE_ENV === "production") {
-	app.set("trust proxy", 1); 
-	sessionObject.cookie.secure = true;
-}
 
 const sessionHandler = session(sessionObject);
 
