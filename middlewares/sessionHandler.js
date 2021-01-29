@@ -9,7 +9,7 @@ const sessionObject = {
 		client: redisClient,
 	}),
 	name: "session",
-	// domain: process.env.NODE_ENV === "production" ? process.env.COOKIE_DOMAIN : "",
+	domain: process.env.NODE_ENV === "production" ? process.env.COOKIE_DOMAIN : "",
 	secret: process.env.REDIS_SECRET,
 	saveUninitialized: false,
 	resave: false,

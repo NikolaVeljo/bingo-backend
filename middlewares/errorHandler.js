@@ -10,6 +10,7 @@ class ErrorHandler extends Error {
 
 const errorHandler = (err, res) => {
 	let { code, message } = err;
+	console.log(err);
 
 	if (!code) {
 		code = 500;
