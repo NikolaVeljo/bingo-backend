@@ -14,7 +14,7 @@ app.use(sessionHandler);
 
 app.use("/", userRouter);
 
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
 	errorHandler(err, res);
 });
 
