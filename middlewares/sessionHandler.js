@@ -12,6 +12,7 @@ const sessionHandler = session({
 	secret: "secret",
 	saveUninitialized: false,
 	resave: false,
+	rolling: true,
 	cookie: {
 		secure: false,
 		httpOnly: true,
