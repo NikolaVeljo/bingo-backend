@@ -13,7 +13,7 @@ const sessionHandler = session({
 	saveUninitialized: false,
 	resave: false,
 	cookie: {
-		secure: false,
+		secure: true,
 		httpOnly: true,
 		maxAge: 1000 * 60 * 30,
 	},
