@@ -8,9 +8,7 @@ const app = express();
 
 // if you run behind a proxy ( e.g. kubernates, ngix)
 // app.set('trust proxy', 1)
-app.use(
-    cors()
-);
+
 app.use(express.json());
 app.use(sessionHandler);
 
