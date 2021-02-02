@@ -1,0 +1,658 @@
+html {
+	font-size: 62.5%;
+}
+
+@media screen and (max-width: 900px) {
+	html {
+		font-size: 62.5%;
+	}
+}
+
+@media screen and (max-width: 750px) {
+	html {
+		font-size: 55%;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	html {
+		font-size: 50%;
+	}
+}
+
+@media screen and (max-width: 360px) {
+	html {
+		font-size: 45%;
+	}
+}
+
+body {
+	font-family: "Poppins", sans-serif;
+	box-sizing: border-box;
+}
+
+.grid-container {
+	width: 100vw;
+	height: 100vh;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: 0.1fr 2fr 0.1fr;
+	gap: 0px 0px;
+	grid-template-areas:
+		"navigation navigation navigation navigation navigation navigation"
+		"bingo-container bingo-container bingo-container bingo-container bingo-container bingo-container"
+		"footer footer footer footer footer footer";
+}
+
+.navigation {
+	background-color: #0067cb;
+	color: #fff;
+	grid-area: navigation;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 2rem;
+}
+
+.logo {
+	width: 3rem;
+	height: 3rem;
+}
+
+.navigation-links {
+	font-weight: 500;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.navigation-links a {
+	padding: 5px;
+	text-decoration: none;
+	color: #fff;
+	font-weight: 800;
+	text-transform: uppercase;
+	margin: 0 10px;
+}
+
+.navigation-links a:hover {
+	box-shadow: 0 0 5px 0 #fff;
+	transform: translateZ(40px);
+}
+
+.active-link {
+	box-shadow: 0 0 5px 0 #fff;
+	transform: translateZ(40px);
+}
+
+.footer {
+	background-color: blue;
+	grid-area: footer;
+	display: flex;
+	justify-content: center;
+}
+
+.grid-bingo-container {
+	grid-area: bingo-container;
+	display: grid;
+	grid-template-columns: 1.2fr 2.1fr 1.2fr 1fr;
+	grid-template-rows: auto 0.4fr;
+	background-color: #111111;
+	gap: 2rem 2rem;
+	padding: 2rem;
+	grid-template-areas:
+		" bingo-lucky-numbers bingo-lucky-numbers bingo-lucky-numbers ticket"
+		" . bingo-select-numbers . .";
+}
+
+@media screen and (max-width: 1200px) {
+	.grid-bingo-container {
+		grid-template-areas:
+			" bingo-lucky-numbers bingo-lucky-numbers bingo-lucky-numbers bingo-lucky-numbers"
+			" bingo-select-numbers bingo-select-numbers . ticket";
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.grid-bingo-container {
+		grid-template-columns: 1.2fr 2.1fr 1.2fr 1fr;
+		grid-template-rows: 1.6fr 0.4fr 0.4fr;
+		grid-template-areas:
+			" bingo-lucky-numbers bingo-lucky-numbers bingo-lucky-numbers bingo-lucky-numbers"
+			" bingo-select-numbers bingo-select-numbers bingo-select-numbers bingo-select-numbers"
+			" ticket ticket ticket ticket";
+	}
+}
+
+.bingo-select-numbers {
+	grid-area: bingo-select-numbers;
+}
+
+.ticket {
+	grid-area: ticket;
+	padding: 1rem;
+	background-color: rgb(42, 45, 53);
+	border: 1px solid white;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 0.1fr 1fr;
+	grid-template-areas:
+		"ticket-header"
+		"ticket-info";
+}
+
+.ticket-info {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	border: 1px solid #ffffff;
+}
+
+.ticket-info-ticket-odds {
+	display: flex;
+	flex-direction: column;
+	padding: 3rem;
+}
+.ticket-header {
+	grid-area: ticket-header;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem;
+	border-bottom: 1px solid #ffffff;
+	color: white;
+}
+
+.ticket-info-selected-numbers {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.ticket-info-selected-number {
+	background-color: gold;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	padding: 10px;
+	margin: 5px;
+	width: 3rem;
+	height: 3rem;
+}
+
+@media screen and (max-width: 600px) {
+	.ticket-info-selected-number {
+		width: 2rem;
+		height: 2rem;
+		padding: 5px;
+	}
+}
+
+.bingo-lucky-numbers {
+	grid-area: bingo-lucky-numbers;
+}
+
+.numberToSelect {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+	gap: 1rem 1rem;
+	background-color: #2b2121;
+	grid-template-areas:
+		". . . . . . . ."
+		". . . . . . . ."
+		". . . . . . . ."
+		". . . . . . . ."
+		". . . . . . . ."
+		". . . . . . . .";
+}
+
+.number-to-select-single {
+	user-select: none;
+	display: flex;
+	height: 4rem;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	font-size: 2rem;
+	background-color: rgba(16, 20, 22, 0.7);
+}
+
+.number-to-select-single:hover {
+	cursor: pointer;
+	border: 1px solid white;
+}
+
+.selected {
+	background-color: #3d3d3d;
+}
+
+.lucky-numbers-grid {
+	display: grid;
+	/*height: 100%;*/
+	grid-template-columns: 0.8fr 1.2fr;
+	grid-template-rows: 0.1fr 0.8fr;
+	gap: 1rem 1rem;
+	grid-template-areas:
+		"lucky-numbers-header lucky-numbers-header"
+		". .";
+	user-select: none;
+}
+.lucky-numbers-header {
+	grid-area: lucky-numbers-header;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	color: white;
+	border-bottom: 1px solid white;
+}
+
+.lucky-numbers-header-info {
+	display: flex;
+	justify-content: space-around;
+	font-size: 2rem;
+	font-weight: 500;
+}
+
+.lucky-numbers-header-info-round {
+	color: white;
+	padding: 1rem;
+}
+.lucky-numbers-header-info-time {
+	color: white;
+	padding: 1rem;
+}
+
+.drum {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.drum-numbers-single-single-item {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/*width: 50px;*/
+	/*height: 50px;*/
+	border-radius: 50%;
+	background-color: #d62222;
+}
+
+.drum-numbers {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-template-rows: repeat(6, 1fr);
+	gap: 1rem 1rem;
+	grid-auto-flow: column;
+	color: white;
+}
+
+.drum-numbers-single {
+	display: flex;
+}
+
+.lucky-numbers-single-pair {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	font-size: 2rem;
+	font-weight: 700;
+}
+
+.lucky-numbers-single-pair img {
+	opacity: 0.3;
+}
+
+/*//new*/
+.grid-container-drum {
+	display: grid;
+	grid-template-columns: repeat(10, 0.8fr);
+	grid-template-rows: auto auto auto auto auto auto auto;
+	grid-auto-flow: column;
+	gap: 0px 0px;
+	grid-template-areas:
+		"header-drum header-drum header-drum header-drum header-drum header-drum header-drum header-drum header-drum header-drum"
+		"gold-ring-0 gold-ring-1 gold-ring-2 gold-ring-3 gold-ring-4 . . . . ."
+		"drum drum drum drum drum . . . . ."
+		"drum drum drum drum drum . . . . ."
+		"drum drum drum drum drum . . . . ."
+		"drum drum drum drum drum . . . . ."
+		"drum drum drum drum drum . . . . .";
+}
+
+@media screen and (max-width: 700px) {
+	.grid-container-drum {
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+		grid-template-rows: auto auto auto auto auto auto auto auto auto;
+		grid-gap: 1rem;
+		grid-template-areas:
+			"header-drum header-drum header-drum header-drum header-drum"
+			"gold-ring-0 gold-ring-1 gold-ring-2 gold-ring-3 gold-ring-4"
+			"drum drum drum drum drum"
+			". . . . ."
+			". . . . ."
+			". . . . ."
+			". . . . ."
+			". . . . .";
+	}
+}
+
+.header-drum {
+	grid-area: header-drum;
+	color: white;
+	/*width: 100%;*/
+	display: flex;
+	justify-content: space-between;
+}
+
+.drum {
+	width: 100%;
+	height: 100%;
+	grid-area: drum;
+	background-image: url("./components/Proba/numbers/drum.png");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 30rem 30rem;
+}
+
+.drum img {
+	width: 40rem;
+	height: 40rem;
+}
+
+.odds {
+	color: white;
+	font-weight: bold;
+	padding-left: 1rem;
+	line-height: 5rem;
+	font-size: 1.5rem;
+}
+
+.ball-animation {
+	animation: animate 4.4s ease-in-out;
+}
+
+@keyframes animate {
+	0% {
+		transform: scale(0.2) rotate(30deg);
+	}
+	100% {
+		transform: scale(0.5) rotate(0deg);
+	}
+}
+
+.number-div {
+	position: relative;
+	/*height: 50px;*/
+	display: grid;
+	grid-template-columns: auto 1fr;
+}
+
+.gold-ring-0 {
+	background-image: url("./components/Proba/numbers/gold.png");
+	background-size: 7rem 7rem;
+	background-repeat: no-repeat;
+	grid-area: gold-ring-0;
+}
+
+.gold-ring-1 {
+	background-image: url("./components/Proba/numbers/gold.png");
+	background-size: 7rem 7rem;
+	background-repeat: no-repeat;
+	grid-area: gold-ring-1;
+}
+
+.gold-ring-2 {
+	background-image: url("./components/Proba/numbers/gold.png");
+	background-size: 7rem 7rem;
+	background-repeat: no-repeat;
+	grid-area: gold-ring-2;
+}
+
+.gold-ring-3 {
+	background-image: url("./components/Proba/numbers/gold.png");
+	background-size: 7rem 7rem;
+	background-repeat: no-repeat;
+	grid-area: gold-ring-3;
+}
+
+.gold-ring-4 {
+	background-image: url("./components/Proba/numbers/gold.png");
+	background-size: 7rem 7rem;
+	background-repeat: no-repeat;
+	grid-area: gold-ring-4;
+}
+
+.gold-ring-0 img {
+	width: 7rem;
+	padding: 5px;
+}
+.gold-ring-1 img {
+	width: 7rem;
+	padding: 5px;
+}
+.gold-ring-2 img {
+	width: 7rem;
+	padding: 5px;
+}
+.gold-ring-3 img {
+	width: 7rem;
+	padding: 5px;
+}
+.gold-ring-4 img {
+	width: 7rem;
+	padding: 5px;
+}
+
+.silver-ring {
+	background-image: url("./components/Proba/numbers/silver.png");
+	background-size: 5rem 5rem;
+	background-repeat: no-repeat;
+}
+
+.div-lucky-number-position {
+	position: absolute;
+	/*width: 25px;*/
+	/*height: 25px;*/
+	bottom: 0;
+	left: 3.5rem;
+	background-image: url("./components/Proba/numbers/lucky.png");
+	background-size: 2.5rem 2.5rem;
+}
+
+.number-div img {
+	width: 5rem;
+	padding: 5px;
+}
+
+.hidden-img {
+	display: none;
+}
+
+.red {
+	background-color: red;
+}
+
+.sign-up-grid-container {
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: grid;
+	width: 100vw;
+	padding: 2rem;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 3fr 1fr;
+	grid-gap: 1rem;
+	grid-template-areas:
+		". . sign-up sign-up . ."
+		". . sign-up sign-up . ."
+		". . sign-up sign-up . .";
+}
+
+.sign-up {
+	grid-area: sign-up;
+	background-color: #3d3d3d;
+	border: 1px solid white;
+	border-radius: 3rem;
+}
+
+.dn {
+	display: none;
+}
+
+.db {
+	display: block;
+}
+
+.overlay-class {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	background-color: #222222b4;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+}
+
+.modal-overlay {
+	width: 350px;
+	height: 600px;
+	border-radius: 5px;
+	background-color: white;
+}
+
+.sign-in {
+	max-width: 350px;
+	height: 100%;
+	border: 1px solid black;
+}
+
+.sign-in-content {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	/* justify-content: space-between; */
+	align-content: center;
+	padding: 2rem;
+}
+
+.sign-in-form{
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.alert{
+	/* height: 4rem; */
+	border: 1px solid red;
+	background-color: #ff8181c5;
+	padding: 1rem;
+	font-size: 1.6rem;
+	text-align: center;
+	border-radius: 4px;
+}
+
+.sign-in-form--button{
+	width: 80%;
+	height: 4rem;
+	margin: auto;
+}
+
+.sign-in-logo {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 5rem;
+	border-bottom: 1px solid #ccc;
+}
+
+.inp {
+	position: relative;
+	display: flex;
+	align-content: center;
+	margin: auto;
+	padding: 10px;
+	width: 100%;
+	max-width: 280px;
+	border-radius: 3px;
+	overflow: hidden;
+}
+.inp .label {
+	position: absolute;
+	top: 40px;
+	left: 12px;
+	font-size: 16px;
+	color: rgba(0, 0, 0, 0.5);
+	font-weight: 500;
+	transform-origin: 0 0;
+	transform: translate3d(0, 0, 0);
+	transition: all 0.2s ease;
+	pointer-events: none;
+}
+
+.inp .focus-bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.05);
+	z-index: -1;
+	transform: scaleX(0);
+	transform-origin: left;
+}
+
+.inp input {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	width: 100%;
+	border: 0;
+	font-family: inherit;
+	padding: 16px 12px 0 12px;
+	height: 56px;
+	font-size: 16px;
+	font-weight: 400;
+	background: rgba(0, 0, 0, 0.02);
+	box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+	color: #000;
+	transition: all 0.15s ease;
+}
+.inp input:hover {
+	background: rgba(0, 0, 0, 0.04);
+	box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+}
+.inp input:not(:-moz-placeholder-shown) + .label {
+	color: rgba(0, 0, 0, 0.5);
+	transform: translate3d(0, -18px, 0) scale(0.75);
+}
+.inp input:not(:-ms-input-placeholder) + .label {
+	color: rgba(0, 0, 0, 0.5);
+	transform: translate3d(0, -18px, 0) scale(0.75);
+}
+.inp input:not(:placeholder-shown) + .label {
+	color: rgba(0, 0, 0, 0.5);
+	transform: translate3d(0, -18px, 0) scale(0.75);
+}
+.inp input:focus {
+	background: rgba(0, 0, 0, 0.05);
+	outline: none;
+	box-shadow: inset 0 -2px 0 #0077ff;
+}
+.inp input:focus + .label {
+	color: #0077ff;
+	transform: translate3d(0, -20px, 0) scale(0.75);
+}
+.inp input:focus + .label + .focus-bg {
+	transform: scaleX(1);
+	transition: all 0.1s ease;
+}

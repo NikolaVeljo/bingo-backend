@@ -14,8 +14,8 @@ const sessionObject = {
 	resave: false,
 	rolling: true,
 	cookie: {
-		domain: process.env.NODE_ENV === "production" ? process.env.COOKIE_DOMAIN : '',
-		secure: true,
+		domain: process.env.NODE_ENV === "production" ? process.env.COOKIE_DOMAIN : 'localhost',
+		secure: false,
 		httpOnly: true,
 		maxAge: 1000 * 60 * 30,
 	},

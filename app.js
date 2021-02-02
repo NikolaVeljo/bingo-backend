@@ -3,6 +3,7 @@ const userRouter = require("./routes/user");
 const sessionHandler = require("./middlewares/sessionHandler");
 const { errorHandler } = require("./middlewares/errorHandler");
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 
@@ -19,15 +20,23 @@ app.use(
     })
 );
 
+
 app.use(express.json());
 app.use(sessionHandler);
 
-app.use("/", userRouter);
+app.use("/api", userRouter);
+
+if ( process.env.NODE_ENV === "production" ){
+    app.use(express.static("client/build"));
+    app.get('*', (req,res) => {
+        res.sendFile(path.resolve(__dirname, "client", "build", "index.html") );
+    });
+}
 
 app.use((err, req, res, next) => {
 	errorHandler(err, res);
 });
 
-app.listen(8080, () => console.log("Server is running"));
+app.listen(5000, () => console.log("Server is running"));
 
 module.exports = app;

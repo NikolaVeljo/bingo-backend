@@ -41,6 +41,8 @@ const signIn = asyncHandler(async (req, res) => {
 
 const signUp = asyncHandler(async (req, res) => {
 	const { username, email, password, passwordConfirm } = req.body;
+	console.log(req.body);
+	console.log(username, email, password, passwordConfirm);
 
 	if (!username || !email || !password || !passwordConfirm) {
 		throw new ErrorHandler(400, "Please fill in all fields");
@@ -76,6 +78,7 @@ const signUp = asyncHandler(async (req, res) => {
 		username: username,
 		email: validator.normalizeEmail(email),
 		password: password,
+		passwordConfirm: passwordConfirm
 	});
 
 	const csrf = crypto.randomBytes(36).toString("hex");
@@ -89,8 +92,9 @@ const signUp = asyncHandler(async (req, res) => {
 });
 
 const signOut = (req, res) => {
+	console.log(req.session);
 	req.session.destroy();
-	res.json("you are logged out");
+	res.json("You are logged out");
 };
 
 const getUser = asyncHandler(async (req, res) => {

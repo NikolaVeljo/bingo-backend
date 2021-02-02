@@ -34,7 +34,7 @@ const userSchema = new Schema({
     },
     role: {
         type: String,
-        enum: ["user", "developer", "admin"],
+        enum: ["user", "..."],
         default: "user",
     },
     confirmed: {
@@ -50,14 +50,6 @@ const userSchema = new Schema({
         type: Date,
         select: false,
     },
-    folders: [{
-        type: Schema.ObjectId,
-        ref: 'Folder'
-    }],
-    records: [{
-        type: Schema.ObjectId,
-        ref: 'Record'
-    }],
 },{
     toJSON: {
         virtuals: true,
