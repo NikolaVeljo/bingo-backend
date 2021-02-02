@@ -15,7 +15,7 @@ const sessionObject = {
 	rolling: true,
 	cookie: {
 		domain: process.env.NODE_ENV === "production" ? process.env.COOKIE_DOMAIN : 'localhost',
-		secure: false,
+		secure: process.env.NODE_ENV === "production" ? true : false,
 		httpOnly: true,
 		maxAge: 1000 * 60 * 30,
 	},
