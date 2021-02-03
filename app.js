@@ -29,7 +29,7 @@ app.use("/api", userRouter);
 
 if (process.env.NODE_ENV === "production") {
 	console.log(__dirname);
-	app.use("", express.static("client/build"));
+	app.use(express.static("client/build"));
 	// Handle React routing, return all requests to React app
 	app.get("*", function (req, res) {
 		res.sendFile(path.resolve(__dirname, "client/build/index.html"));
