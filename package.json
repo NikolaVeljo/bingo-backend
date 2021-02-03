@@ -21,6 +21,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "mongoose": "^5.11.13",
+    "nodemailer": "^6.4.17",
     "redis": "^3.0.2",
     "validator": "^13.5.2"
   },

@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const asyncHandler = require("../middlewares/asyncHandler");
 const { ErrorHandler } = require("../middlewares/errorHandler");
 const User = require("../models/user");
+const sendEmail = require('../services/emailHandler');
 
 const signIn = asyncHandler(async (req, res) => {
 	const { email, password } = req.body;
@@ -78,11 +79,23 @@ const signUp = asyncHandler(async (req, res) => {
 		username: username,
 		email: validator.normalizeEmail(email),
 		password: password,
-		passwordConfirm: passwordConfirm
+		passwordConfirm: passwordConfirm,
 	});
 
 	const csrf = crypto.randomBytes(36).toString("hex");
+	const emailToken = crypto.randomBytes(36).toString("hex");
 
+	const text = `https://bingo-frontend-iku9k.ondigitalocean.app/confirm-email/${emailToken}`;
+    const html = `<a https://bingo-frontend-iku9k.ondigitalocean.app/confirm-email/${emailToken}">Confirm email</a>`;
+
+    await sendEmail({
+        email: user.email,
+        subject: "Please confirm your email",
+        text,
+        html,
+    });
+
+	console.log(user.confirmed)
 	res.status(201).json({
 		username: user.username,
 		csrf: csrf,
@@ -92,9 +105,17 @@ const signUp = asyncHandler(async (req, res) => {
 });
 
 const signOut = (req, res) => {
-	console.log(req.session);
-	req.session.destroy();
-	res.json("You are logged out");
+	req.session.destroy((err) => {
+		if (err) {
+			return res.status(400).json("Logout error");
+		} else {
+			req.session = null;
+			res.clearCookie("session", {
+				path: "/",
+			});
+			res.status(200).json("Logged out!");
+		}
+	});
 };
 
 const getUser = asyncHandler(async (req, res) => {

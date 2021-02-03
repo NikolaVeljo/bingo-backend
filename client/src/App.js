@@ -7,6 +7,7 @@ import Statistic from "./components/Statistic/Statistic";
 import Footer from "./components/Footer/Footer";
 import Profile from "./components/Profile";
 import Signout from "./components/Signout";
+import EmailConfirm from "./components/EmailConfirm/EmailConfirm";
 
 export default function App() {
 	  
@@ -37,6 +38,9 @@ export default function App() {
 					<Signout />
 				</Route>
 
+				<Route path='/email-confirm/:emailToken' exact>
+					<EmailConfirm />
+				</Route>
 				
 				</Switch>
 				<Footer />

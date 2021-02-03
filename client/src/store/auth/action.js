@@ -146,3 +146,33 @@ export const signout = () => async (dispatch) => {
 		});
 	}
 };
+
+export const emailConfirm = (formProps) => async (dispatch) => {
+    try {
+        dispatch({
+            type: actionType.EMAIL_CONFIRM_BEGINS,
+        });
+		const response = await API.post("/email-confirm", formProps);
+		
+        localStorage.setItem("confirmed", response.data.confirmed);
+		
+		dispatch({
+            type: actionType.EMAIL_CONFIRM_SUCCESS,
+            payload: {
+                confirmed: response.data.confirmed,
+            },
+		});
+		
+    } catch (err) {
+        let error;
+        if (err.response) {
+            error = err.response.data.message;
+        } else {
+            error = "Server is down";
+        }
+        dispatch({
+            type: actionType.EMAIL_CONFIRM_FAILURE,
+            payload: error,
+        });
+    }
+};
