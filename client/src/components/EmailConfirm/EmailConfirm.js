@@ -3,11 +3,13 @@ import { useParams } from 'react-router';
 
 export default function EmailConfirm () {
 
-    let id = useParams();
+    let {id} = useParams();
+
+    console.log(id);
 
     return (
         <Fragment>
-            <div  > This is email confirmation page {id} </div>
+            <div  > This is email confirmation page </div>
         </Fragment>
     )
 }
