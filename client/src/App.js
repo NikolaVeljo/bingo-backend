@@ -38,7 +38,7 @@ export default function App() {
 					<Signout />
 				</Route>
 
-				<Route path='/email-confirm/:emailToken' exact>
+				<Route path='/confirm-email/:emailToken' exact>
 					<EmailConfirm />
 				</Route>
 				
