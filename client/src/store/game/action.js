@@ -5,7 +5,6 @@ export const updateGame = (formProps) => async (dispatch) => {
         dispatch({
             type: actionType.GAME_UPDATE_BEGINS,
         });
-        console.log( formProps )
         dispatch({
             type: actionType.GAME_UPDATE_SUCCESS,
             payload: {

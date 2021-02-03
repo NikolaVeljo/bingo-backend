@@ -19,7 +19,6 @@ const gameReducer = (state = initialGameState, {type, payload}) => {
             }
             
         case actionType.GAME_UPDATE_SUCCESS:
-            console.log( payload )
             return {
                 ...state,
                 gameNumbers: payload.gameNumbers ? payload.gameNumbers : state.gameNumbers,

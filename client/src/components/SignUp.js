@@ -2,22 +2,21 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router";
 import { signup } from "../store/auth/action";
-import {Link} from "react-router-dom";
-
+import { Link } from "react-router-dom";
 
 export default function Signin() {
 	const dispatch = useDispatch();
 	const isAuthenticated = useSelector((state) => state.auth.authenticated);
+	const isEmailConfirmed = useSelector((state) => state.auth.confirmed);
 	const error = useSelector((state) => state.auth.error);
-  const [userUsername, setUserUsername] = useState(null);
-  const [userEmail, setUserEmail] = useState(null);
-  const [userPassword, setUserPassword] = useState(null);
-  const [userPasswordConfirm, setUserPasswordConfirm] = useState(null);
+	const [userUsername, setUserUsername] = useState(null);
+	const [userEmail, setUserEmail] = useState(null);
+	const [userPassword, setUserPassword] = useState(null);
+	const [userPasswordConfirm, setUserPasswordConfirm] = useState(null);
 
-
-  const handleUsernameChange = (e) => {
-    setUserUsername(e.target.value)
-  }
+	const handleUsernameChange = (e) => {
+		setUserUsername(e.target.value);
+	};
 
 	const handleEmailChange = (e) => {
 		setUserEmail(e.target.value);
@@ -25,20 +24,20 @@ export default function Signin() {
 
 	const handlePasswordChange = (e) => {
 		setUserPassword(e.target.value);
-  };
-  
-  const handleSetUserPasswordConfirm = (e) => {
-    setUserPasswordConfirm(e.target.value);
-  }
+	};
+
+	const handleSetUserPasswordConfirm = (e) => {
+		setUserPasswordConfirm(e.target.value);
+	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		dispatch(
 			signup({
-        username: userUsername,
+				username: userUsername,
 				email: userEmail,
-        password: userPassword,
-        passwordConfirm: userPasswordConfirm,
+				password: userPassword,
+				passwordConfirm: userPasswordConfirm,
 			})
 		);
 	};
@@ -56,6 +55,11 @@ export default function Signin() {
 							{error}
 						</div>
 					)}
+					{isEmailConfirmed === false && (
+                        <div className='alert alert-danger' role='alert'>
+                            Please confirm you email!
+                        </div>
+                    )}
 					<div className='form-inputs'>
 						<label for='inp' class='inp'>
 							<input
@@ -104,9 +108,9 @@ export default function Signin() {
 					<button type='submit' className='sign-in-form--button'>
 						Sign Up
 					</button>
-          <div style={{alignItems: 'center'}}>
-            Already have an account? <Link>Sign In</Link>
-          </div>
+					<div style={{ alignItems: "center" }}>
+						Already have an account? <Link>Sign In</Link>
+					</div>
 				</form>
 			</div>
 		</div>

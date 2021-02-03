@@ -15,7 +15,7 @@ export const checkAuthState = async (dispatch) => {
 			dispatch({
 				type: actionType.CHECKING_AUTH_STATE_SUCCESS,
 				payload: {
-					authenticated: true,
+					authenticated: response.data.authenticated,
 					username: response.data.username,
 					csrf: response.data.csrf,
 					confirmed: response.data.confirmed,
@@ -60,7 +60,7 @@ export const signup = (formProps) => async (dispatch) => {
 		dispatch({
 			type: actionType.SIGNUP_SUCCESS,
 			payload: {
-				authenticated: true,
+				authenticated: response.data.authenticated,
 				username: response.data.username,
 				csrf: response.data.csrf,
 				confirmed: response.data.confirmed,
@@ -89,13 +89,14 @@ export const signin = (formProps) => async (dispatch) => {
 		});
 		
 		const response = await API.post("/sign-in", formProps);
-
-		localStorage.setItem("csrf", response.data.csrf);
+		if ( response.data.csrf ){
+			localStorage.setItem("csrf", response.data.csrf);
+		}
 
 		dispatch({
 			type: actionType.SIGNIN_SUCCESS,
 			payload: {
-				authenticated: true,
+				authenticated: response.data.authenticated,
 				username: response.data.username,
 				csrf: response.data.csrf,
 				confirmed: response.data.confirmed,
@@ -154,12 +155,10 @@ export const emailConfirm = (formProps) => async (dispatch) => {
         });
 		const response = await API.post("/email-confirm", formProps);
 		
-        localStorage.setItem("confirmed", response.data.confirmed);
-		
 		dispatch({
             type: actionType.EMAIL_CONFIRM_SUCCESS,
             payload: {
-                confirmed: response.data.confirmed,
+                confirmed: response.data.emailConfirmed,
             },
 		});
 		

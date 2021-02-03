@@ -21,7 +21,6 @@ const authReducer = (state = initialAuthState, { type, payload }) => {
 				error: null,
 			};
 		case actionType.CHECKING_AUTH_STATE_SUCCESS:
-			console.log(payload);
 			return {
 				...state,
 				loading: false,

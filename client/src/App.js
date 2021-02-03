@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Route, Switch, useParams } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Bingo from "./components/Bingo/Bingo";
 import Navigation from "./components/Navigation/Navigation";
 import Tickets from "./components/Tickets/Ticket";

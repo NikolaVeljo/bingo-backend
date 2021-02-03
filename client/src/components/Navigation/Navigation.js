@@ -21,8 +21,6 @@ export default function Navigation() {
     const [show, setShow] = useState(false);
     const [component, setComponent] = useState(false);
 
-    console.log(isAuthenticated);
-
     const openModal = (e) => {
         console.log(e.target.innerText);
         setComponent(e.target.innerText)

@@ -26,11 +26,21 @@ const signIn = asyncHandler(async (req, res) => {
 
 	const csrf = crypto.randomBytes(36).toString("hex");
 
-	req.session.uid = user._id;
-	req.session.username = user.username;
-	req.session.csrf = csrf;
-	req.session.confirmed = user.confirmed;
-	req.session.role = user.role;
+	if( user.confirmed ){
+		req.session.uid = user._id;
+		req.session.username = user.username;
+		req.session.csrf = csrf;
+		req.session.confirmed = user.confirmed;
+		req.session.role = user.role;
+	} else {
+		return res.status(200).json({
+			authenticated: false,
+			username: null,
+			csrf: null,
+			confirmed: false,
+			role: null,
+		});
+	}
 
 	res.status(200).json({
 		username: user.username,
@@ -42,8 +52,6 @@ const signIn = asyncHandler(async (req, res) => {
 
 const signUp = asyncHandler(async (req, res) => {
 	const { username, email, password, passwordConfirm } = req.body;
-	console.log(req.body);
-	console.log(username, email, password, passwordConfirm);
 
 	if (!username || !email || !password || !passwordConfirm) {
 		throw new ErrorHandler(400, "Please fill in all fields");
@@ -85,23 +93,40 @@ const signUp = asyncHandler(async (req, res) => {
 	const csrf = crypto.randomBytes(36).toString("hex");
 	const emailToken = crypto.randomBytes(36).toString("hex");
 
-	const text = `https://bingo-frontend-iku9k.ondigitalocean.app/confirm-email/${emailToken}`;
-    const html = `<a href="https://bingo-frontend-iku9k.ondigitalocean.app/confirm-email/${emailToken}">Confirm email</a>`;
+	let text;
+	let html;
+
+	if (process.env.NODE_ENV === "production"){
+		text = `https://bingo-frontend-iku9k.ondigitalocean.app/confirm-email/${emailToken}`;
+		html = `<a href="https://bingo-frontend-iku9k.ondigitalocean.app/confirm-email/${emailToken}">Confirm email</a>`;
+	} else {
+		text = `http://localhost:3000/confirm-email/${emailToken}`;
+    	html = `<a href="http://localhost:3000/confirm-email/${emailToken}">Confirm email</a>`;
+	}
+	
 
     await sendEmail({
         email: user.email,
         subject: "Please confirm your email",
         text,
         html,
-    });
-
-	console.log(user.confirmed)
-	res.status(201).json({
-		username: user.username,
-		csrf: csrf,
-		confirmed: user.confirmed,
-		role: user.role,
 	});
+
+	req.session.uid = user._id;
+	req.session.username = user.username;
+	req.session.csrf = csrf;
+	req.session.confirmed = user.confirmed;
+	req.session.role = user.role;
+	req.session.emailToken = emailToken;
+
+	res.status(200).json({
+		authenticated: false,
+		username: null,
+		csrf: null,
+		confirmed: false,
+		role: null,
+	});
+	
 });
 
 const signOut = (req, res) => {
@@ -127,9 +152,31 @@ const getUser = asyncHandler(async (req, res) => {
 	});
 });
 
+const emailConfirm = asyncHandler(async (req, res) => {
+	const {emailConfirm} = req.body;
+
+	console.log(req.session.emailToken);
+
+	if ( !emailConfirm ){
+		throw new ErrorHandler(400, "You need to provide token")
+	}
+	
+	if ( emailConfirm === req.session.emailToken){
+		console.log("tokeni su isti");
+	}
+	
+	res.status(200).json({
+		username: req.session.username,
+		csrf: req.session.csrf,
+		confirmed: req.session.confirmed,
+		role: req.session.role,
+	});
+});
+
 module.exports = {
 	signIn,
 	signOut,
 	signUp,
+	emailConfirm,
 	getUser,
 };
