@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, useParams } from "react-router-dom";
 import Bingo from "./components/Bingo/Bingo";
 import Navigation from "./components/Navigation/Navigation";
 import Tickets from "./components/Tickets/Ticket";
@@ -10,7 +10,7 @@ import Signout from "./components/Signout";
 import EmailConfirm from "./components/EmailConfirm/EmailConfirm";
 
 export default function App() {
-	  
+
 	return (
 		<div className='grid-container'>
 			<BrowserRouter>
@@ -38,7 +38,7 @@ export default function App() {
 					<Signout />
 				</Route>
 
-				<Route path='/confirm-email/:emailToken' exact>
+				<Route path='/confirm-email/:id' exact>
 					<EmailConfirm />
 				</Route>
 				

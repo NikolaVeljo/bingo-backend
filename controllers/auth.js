@@ -86,7 +86,7 @@ const signUp = asyncHandler(async (req, res) => {
 	const emailToken = crypto.randomBytes(36).toString("hex");
 
 	const text = `https://bingo-frontend-iku9k.ondigitalocean.app/confirm-email/${emailToken}`;
-    const html = `<a https://bingo-frontend-iku9k.ondigitalocean.app/confirm-email/${emailToken}">Confirm email</a>`;
+    const html = `<a href="https://bingo-frontend-iku9k.ondigitalocean.app/confirm-email/${emailToken}">Confirm email</a>`;
 
     await sendEmail({
         email: user.email,
