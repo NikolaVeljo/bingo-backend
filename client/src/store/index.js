@@ -5,7 +5,8 @@ import reducer from "./reducer";
 
 const store = createStore(
     reducer,
-    composeWithDevTools(applyMiddleware(thunk))
+    // composeWithDevTools(applyMiddleware(thunk))
+    applyMiddleware(thunk),
 );
 
 export default store;
