@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router";
 import { signin } from "../store/auth/action";
+import { Link } from "react-router-dom";
 
 export default function Signin() {
 	const dispatch = useDispatch();
 	const isAuthenticated = useSelector((state) => state.auth.authenticated);
-	const isEmailConfirmed = useSelector((state) => state.auth.confirmed);
-	const error = useSelector((state) => state.auth.error);
 	const [userEmail, setUserEmail] = useState(null);
 	const [userPassword, setUserPassword] = useState(null);
 
@@ -37,16 +36,6 @@ export default function Signin() {
 				</div>
 				{isAuthenticated && <Redirect to={{ pathname: "/" }} />}
 				<form className='sign-in-form' onSubmit={handleSubmit}>
-					{error && (
-						<div className='alert alert-danger' role='alert'>
-							{error}
-						</div>
-					)}
-                    {isEmailConfirmed === false && (
-                        <div className='alert alert-danger' role='alert'>
-                            Please confirm you email!
-                        </div>
-                    )}
 					<div className='form-inputs'>
 						<label for='inp' class='inp'>
 							<input
@@ -70,10 +59,15 @@ export default function Signin() {
 							<span class='focus-bg'></span>
 						</label>
 					</div>
-
-					<button type='submit' className='sign-in-form--button'>
-						Sign In
-					</button>
+					<div className='sign-in-buttons'>
+						<button type='submit' className='sign-in-form--button'>
+							Sign In
+						</button>
+						<div style={{ alignItems: "center" }}>
+							Already have an account? <Link to="/sign-up">Sign Up</Link>
+						</div>
+					</div>
+					
 				</form>
 			</div>
 		</div>

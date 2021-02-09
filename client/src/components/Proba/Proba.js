@@ -102,7 +102,7 @@ export default function Proba() {
 				</div>
 			) : (
 				<>
-					<div className='drum'>
+					<div className='drum' key={numbers[numbers.length - 1]}>
 						<img
 							className='ball-animation'
 							key={numbers[numbers.length - 1]}
@@ -110,6 +110,7 @@ export default function Proba() {
 								numbers &&
 								`./numbers/${numbers[numbers.length - 1]}.png`
 							}
+							alt={numbers[numbers.length - 1]}
 						/>
 					</div>
 					{values &&
@@ -121,6 +122,7 @@ export default function Proba() {
 											? `gold-ring-${key}`
 											: "number-div silver-ring"
 									}
+									key={key}
 								>
 									{luckyNumbersPosition &&
 										luckyNumbersPosition.map((luckyNum) => {
@@ -130,7 +132,7 @@ export default function Proba() {
 												);
 											}
 										})}
-									<div>
+									<div key={key}>
 										{numbers && numbers[key] ? (
 											<img
 												key={numbers[key]}
@@ -141,6 +143,7 @@ export default function Proba() {
 														: numbers &&
 														  `./numbers/${numbers[key]}.png`
 												}
+												alt={key}
 											/>
 										) : (
 											<img
@@ -149,6 +152,7 @@ export default function Proba() {
 													numbers &&
 													`./numbers/ball.png`
 												}
+												alt={key}
 											/>
 										)}
 									</div>

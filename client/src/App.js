@@ -8,12 +8,19 @@ import Footer from "./components/Footer/Footer";
 import Profile from "./components/Profile";
 import Signout from "./components/Signout";
 import EmailConfirm from "./components/EmailConfirm/EmailConfirm";
+import {Toaster} from "react-hot-toast";
+import Signin from "./components/Signin";
+import SignUp from "./components/SignUp";
+
+
 
 export default function App() {
 
 	return (
 		<div className='grid-container'>
 			<BrowserRouter>
+			<Toaster />
+
 			<Navigation />
 			
 			<Switch>
@@ -36,6 +43,14 @@ export default function App() {
 
 				<Route path='/sign-out' exact>
 					<Signout />
+				</Route>
+
+				<Route path='/sign-in' exact>
+					<Signin />
+				</Route>
+
+				<Route path='/sign-up' exact>
+					<SignUp />
 				</Route>
 
 				<Route path='/confirm-email/:id' exact>

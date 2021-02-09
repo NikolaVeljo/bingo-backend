@@ -21,7 +21,7 @@ export default function Ticket() {
 				stake: stake,
 			})
 		);
-	}, [stake]);
+	}, [stake, dispatch]);
 
 	return (
 		<Fragment>

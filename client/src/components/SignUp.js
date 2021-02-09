@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Redirect } from "react-router";
 import { signup } from "../store/auth/action";
 import { Link } from "react-router-dom";
 
 export default function Signin() {
 	const dispatch = useDispatch();
-	const isAuthenticated = useSelector((state) => state.auth.authenticated);
-	const isEmailConfirmed = useSelector((state) => state.auth.confirmed);
-	const error = useSelector((state) => state.auth.error);
 	const [userUsername, setUserUsername] = useState(null);
 	const [userEmail, setUserEmail] = useState(null);
 	const [userPassword, setUserPassword] = useState(null);
@@ -39,7 +36,7 @@ export default function Signin() {
 				password: userPassword,
 				passwordConfirm: userPasswordConfirm,
 			})
-		);
+		);		
 	};
 
 	return (
@@ -48,18 +45,7 @@ export default function Signin() {
 				<div className='sign-in-logo'>
 					<h1>Lucky Six / Sign Up</h1>
 				</div>
-				{isAuthenticated && <Redirect to={{ pathname: "/" }} />}
 				<form className='sign-in-form' onSubmit={handleSubmit}>
-					{error && (
-						<div className='alert alert-danger' role='alert'>
-							{error}
-						</div>
-					)}
-					{isEmailConfirmed === false && (
-                        <div className='alert alert-danger' role='alert'>
-                            Please confirm you email!
-                        </div>
-                    )}
 					<div className='form-inputs'>
 						<label for='inp' class='inp'>
 							<input
@@ -105,11 +91,13 @@ export default function Signin() {
 							<span class='focus-bg'></span>
 						</label>
 					</div>
+					<div className='sign-in-buttons'>
 					<button type='submit' className='sign-in-form--button'>
 						Sign Up
 					</button>
 					<div style={{ alignItems: "center" }}>
-						Already have an account? <Link>Sign In</Link>
+						Already have an account? <Link to="/sign-in">Sign In</Link>
+					</div>
 					</div>
 				</form>
 			</div>

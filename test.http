@@ -1,0 +1,10 @@
+POST http://localhost:5000/api/sign-in HTTP/1.1
+content-type: application/json
+
+{
+    "email": "nikolaveljokv@gmail.com",
+    "password": "kraljevo22"
+}
+
+###
+GET http://localhost:5000/api/profile

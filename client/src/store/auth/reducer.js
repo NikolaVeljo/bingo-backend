@@ -27,7 +27,6 @@ const authReducer = (state = initialAuthState, { type, payload }) => {
 				checked: true,
 				authenticated: payload.authenticated,
 				username: payload.username,
-				confirmed: payload.confirmed,
 				role: payload.role,
 				csrf: payload.csrf,
 				error: null,
@@ -51,7 +50,6 @@ const authReducer = (state = initialAuthState, { type, payload }) => {
 				checked: true,
 				authenticated: payload.authenticated,
 				username: payload.username,
-				confirmed: payload.confirmed,
 				role: payload.role,
 				csrf: payload.csrf,
 				error: null,
@@ -94,15 +92,12 @@ const authReducer = (state = initialAuthState, { type, payload }) => {
 				error: null,
 			};
 		case actionType.SIGNUP_SUCCESS:
+			console.log(payload)
 			return {
 				...state,
 				loading: false,
 				checked: true,
-				authenticated: payload.authenticated,
-				username: payload.username,
-				confirmed: payload.confirmed,
-				role: payload.role,
-				csrf: payload.csrf,
+				message: payload.message,
 				error: null,
 			};
 		case actionType.SIGNUP_FAILURE:
@@ -118,6 +113,7 @@ const authReducer = (state = initialAuthState, { type, payload }) => {
 				error: null,
 			};
 		case actionType.EMAIL_CONFIRM_SUCCESS:
+			console.log(payload);
 			return {
 				...state,
 				loading: false,
@@ -125,6 +121,24 @@ const authReducer = (state = initialAuthState, { type, payload }) => {
 				error: null,
 			};
 		case actionType.EMAIL_CONFIRM_FAILURE:
+			return {
+				...state,
+				loading: false,
+				error: payload,
+			};
+			case actionType.RESEND_EMAIL_BEGINS:
+			return {
+				...state,
+				loading: true,
+				error: null,
+			};
+		case actionType.RESEND_EMAIL_SUCCESS:
+			return {
+				...state,
+				loading: false,
+				error: null,
+			};
+		case actionType.RESEND_EMAIL_FAILURE:
 			return {
 				...state,
 				loading: false,

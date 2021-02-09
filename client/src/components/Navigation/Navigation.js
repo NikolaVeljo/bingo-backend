@@ -1,35 +1,33 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {useLocation} from "react-router";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {checkAuthState} from "../../store/auth/action";
 import logo from '../Proba/numbers/22.png';
-import FormsWrapper from '../FormsWrapper';
-
-import Modal from 'react-modal';
+// import Modal from 'react-modal';
 
 export default function Navigation() {
 
 
-    Modal.setAppElement('#root');
+    // Modal.setAppElement('#root');
 
     let pathname = useLocation().pathname;
     const dispatch = useDispatch();
 
     const isAuthenticated = useSelector((state) => state.auth.authenticated);
     const isChecked = useSelector((state) => state.auth.checked);
-    const [show, setShow] = useState(false);
-    const [component, setComponent] = useState(false);
+    // const [show, setShow] = useState(false);
+    // const [component, setComponent] = useState(false);
 
-    const openModal = (e) => {
-        console.log(e.target.innerText);
-        setComponent(e.target.innerText)
-        setShow(true);
-    }
+    // const openModal = (e) => {
+    //     console.log(e.target.innerText);
+    //     setComponent(e.target.innerText)
+    //     setShow(true);
+    // }
 
-    const closeModal = () => {
-        setShow(false);
-    }
+    // const closeModal = () => {
+    //     setShow(false);
+    // }
 
 
     useEffect(() => {
@@ -42,7 +40,7 @@ export default function Navigation() {
         <div className="navigation">
 
             <div className="logo">
-                <img src={logo} width='40px' height='40px'/>
+                <img src={logo} alt="Logo" width='40px' height='40px'/>
             </div>
 
             <div className="header-items">
@@ -60,9 +58,9 @@ export default function Navigation() {
                     </div>
                 ):(
                     <div className='navigation-links'>
-                        <Link to={pathname} onClick={openModal} className={(pathname === "/sign-in") ? "active-link" : ""}>Sign In</Link>
-                        <Link to={pathname} onClick={openModal} className={(pathname === "/sign-up") ? "active-link" : ""}>Sign Up</Link>
-                        <Modal
+                        <Link to="/sign-in" className={(pathname === "/sign-in") ? "active-link" : ""}>Sign In</Link>
+                        <Link to="/sign-up" className={(pathname === "/sign-up") ? "active-link" : ""}>Sign Up</Link>
+                        {/* <Modal
                             overlayClassName='overlay-class'
                             shouldCloseOnOverlayClick={true}
                             className='modal-overlay'
@@ -70,7 +68,7 @@ export default function Navigation() {
                             onRequestClose={closeModal}
                             contentLabel="example modal">
                                 <FormsWrapper component={component} />
-                        </Modal>
+                        </Modal> */}
                     </div>
                     )}
 

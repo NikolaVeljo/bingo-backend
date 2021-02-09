@@ -14,7 +14,7 @@ export default function Profile () {
     useEffect(() => {
         getRedis();
         console.log(redis)
-    },[] );
+    },[]);
 
 
 

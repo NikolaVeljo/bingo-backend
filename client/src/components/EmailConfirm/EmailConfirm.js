@@ -1,23 +1,26 @@
 import React, { Fragment, useEffect } from 'react';
 import { useParams } from 'react-router';
-import { emailConfirm } from '../../store/auth/action';
-import {useDispatch} from "react-redux";
+import { emailToken } from '../../store/auth/action';
+import {useDispatch, useSelector} from "react-redux";
+import { Redirect } from "react-router";
 
 export default function EmailConfirm () {
     const dispatch = useDispatch();
+    
     let {id} = useParams();
-
+    let isEmailConfirmed = useSelector((state) => state.auth.confirmed);
+    
     useEffect(()=>{
-
-        dispatch(emailConfirm({
-            emailConfirm: id
+        dispatch(emailToken({
+            emailToken: id
         }))
+    }, []);
 
-    },[]);
+    console.log(isEmailConfirmed);
 
     return (
         <Fragment>
-            <div  > This is email confirmation page </div>
+            {isEmailConfirmed && (<Redirect to={{ pathname: "/sign-in" }} />)}
         </Fragment>
     )
 }
