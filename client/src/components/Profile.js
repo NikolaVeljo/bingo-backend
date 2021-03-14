@@ -8,7 +8,7 @@ export default function Profile () {
     const getRedis = async () => {
         const response = await API.get("/profile");
 
-        setRedis(response.data)
+        setRedis(response.data);
     };
 
     useEffect(() => {

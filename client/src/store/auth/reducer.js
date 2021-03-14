@@ -67,7 +67,6 @@ const authReducer = (state = initialAuthState, { type, payload }) => {
 				error: null,
 			};
 		case actionType.SIGNOUT_SUCCESS:
-			console.log(payload.auth);
 			return {
 				...state,
 				loading: false,
@@ -92,11 +91,11 @@ const authReducer = (state = initialAuthState, { type, payload }) => {
 				error: null,
 			};
 		case actionType.SIGNUP_SUCCESS:
-			console.log(payload)
 			return {
 				...state,
 				loading: false,
 				checked: true,
+				signedUp: true,
 				message: payload.message,
 				error: null,
 			};
@@ -113,7 +112,6 @@ const authReducer = (state = initialAuthState, { type, payload }) => {
 				error: null,
 			};
 		case actionType.EMAIL_CONFIRM_SUCCESS:
-			console.log(payload);
 			return {
 				...state,
 				loading: false,

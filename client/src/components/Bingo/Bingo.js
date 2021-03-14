@@ -7,8 +7,6 @@ import {useSelector} from 'react-redux';
 export default function Bingo () {
 	const isAuthenticated = useSelector((state) => state.auth.authenticated);
 
-    console.log(isAuthenticated);
-
     return (
         <Fragment>
             

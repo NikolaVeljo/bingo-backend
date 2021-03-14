@@ -55,6 +55,10 @@ const userSchema = new Schema({
         type: Date,
         select: false,
     },
+    tickets: [{
+        type: Schema.ObjectId,
+        ref: 'Ticket'
+    }]
 },{
     toJSON: {
         virtuals: true,

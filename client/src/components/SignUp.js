@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Redirect } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+// import { Redirect } from "react-router";
 import { signup } from "../store/auth/action";
 import { Link } from "react-router-dom";
 
@@ -10,6 +10,7 @@ export default function Signin() {
 	const [userEmail, setUserEmail] = useState(null);
 	const [userPassword, setUserPassword] = useState(null);
 	const [userPasswordConfirm, setUserPasswordConfirm] = useState(null);
+	// let isSignedUp = useSelector((state) => state.auth.signedUp);
 
 	const handleUsernameChange = (e) => {
 		setUserUsername(e.target.value);
@@ -36,7 +37,7 @@ export default function Signin() {
 				password: userPassword,
 				passwordConfirm: userPasswordConfirm,
 			})
-		);		
+		);
 	};
 
 	return (

@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { updateTicket } from "../../store/tikcets/action";
 import { updateGame } from "../../store/game/action";
 
 export default function Proba() {
@@ -62,6 +61,8 @@ export default function Proba() {
 		};
 	}, []);
 
+	
+
 	useEffect(() => {
 		if (!wss.current) return;
 		wss.current.onmessage = (e) => {
@@ -70,7 +71,6 @@ export default function Proba() {
 			setNumbers(message.numbers);
 			setRoundNumber(message.id);
 			setLuckyNumbersPosition(message.luckyNumbersPosition);
-			
         };
         
         dispatch(
@@ -81,14 +81,6 @@ export default function Proba() {
             })
         );
 	}, [numbers]);
-
-	useEffect(() => {
-		dispatch(
-			updateTicket({
-				roundId: roundNumber,
-			})
-		);
-	}, [roundNumber]);
 
 	return (
 		<div className='grid-container-drum'>

@@ -1,5 +1,6 @@
 const express = require("express");
 const userRouter = require("./routes/user");
+const ticketRouter = require("./routes/ticket");
 const sessionHandler = require("./middlewares/sessionHandler");
 const { errorHandler } = require("./middlewares/errorHandler");
 const cors = require("cors");
@@ -26,6 +27,7 @@ app.use(express.json());
 app.use(sessionHandler);
 
 app.use("/api", userRouter);
+app.use("/api", ticketRouter);
 
 if (process.env.NODE_ENV === "production") {
 	app.use(express.static("client/build"));

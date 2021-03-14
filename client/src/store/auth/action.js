@@ -1,6 +1,9 @@
 import * as actionType from "./type";
 import API from "../../API";
 import toast from 'react-hot-toast';
+// import { browserHistory } from 'react-router'
+import { useHistory } from "react-router-dom";
+
 
 export const checkAuthState = async (dispatch) => {
 	try {
@@ -66,7 +69,9 @@ export const signup = (formProps) => async (dispatch) => {
 				message: response.data
 			},
 		});
+		
 		toast.success(response.data);
+		useHistory.push('/sign-in');
 	} catch (err) {
 
 		let error;

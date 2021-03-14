@@ -102,7 +102,7 @@ const signUp = asyncHandler(async (req, res) => {
 		html,
 	});
 
-	res.redirect(301,'/sign-in');
+	res.status(201).json("Account created");
 });
 
 const signOut = (req, res) => {

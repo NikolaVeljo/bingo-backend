@@ -1,26 +1,34 @@
-import React, { Fragment, useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React, { Fragment, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { updateTicket } from "../../../store/tikcets/action";
 
 export default function NumberToSelect() {
 	const dispatch = useDispatch();
+	const ticket = useSelector((state) => state.ticket.ticketNumbers);
 
-	const [ticket, setTicket] = useState([]);
-
-	const createTicket = (e) => {
+	const createTicketNumbers = (e) => {
 		let value = Number(e.target.innerText);
 
 		if (!ticket.includes(Number(e.target.innerText))) {
-			setTicket((prevNumbers) => [
-				...prevNumbers,
-				Number(e.target.innerText),
-			]);
+
+			dispatch(
+				updateTicket({
+					ticketNumbers: [...ticket, Number(e.target.innerText) ],
+				})
+			);
+
 			e.target.classList.add("selected");
 		} else {
-			setTicket(ticket.filter((item) => item !== value));
+			dispatch(
+				updateTicket({
+					ticketNumbers: ticket.filter((item) => item !== value ? ticket.slice(item, 1) : null),
+				})
+			);
 			e.target.classList.remove("selected");
 		}
 	};
+
+	
 
 	const preventUserClick = (ticket) => {
 		let single = document.querySelectorAll(".number-to-select-single");
@@ -47,7 +55,7 @@ export default function NumberToSelect() {
 				<div
 					className='number-to-select-single'
 					key={i}
-					onClick={createTicket}
+					onClick={createTicketNumbers}
 				>
 					{i}
 				</div>
@@ -59,12 +67,7 @@ export default function NumberToSelect() {
 
 	useEffect(() => {
 		preventUserClick(ticket);
-		dispatch(
-			updateTicket({
-				ticketNumbers: ticket,
-			})
-		);
-	}, [ticket, dispatch]);
+	}, [ticket]);
 
 	return (
 		<Fragment>
