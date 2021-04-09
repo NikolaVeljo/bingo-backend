@@ -13,6 +13,12 @@ const ticketSchema = new Schema({
         min:10,
         max: 1000,
     },
+    status: {
+        type: String,
+        required: true,
+        default:'pending',
+        values:['pending', 'winning', 'losed']
+    },
     game:{
         type: Schema.ObjectId,
         ref: 'Game'

@@ -57,8 +57,12 @@ const userSchema = new Schema({
     },
     tickets: [{
         type: Schema.ObjectId,
-        ref: 'Ticket'
-    }]
+        ref: 'Ticket',
+    }],
+    balance: {
+        type: Number,
+        default: 5000,
+    }
 },{
     toJSON: {
         virtuals: true,

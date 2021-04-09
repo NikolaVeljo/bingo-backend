@@ -51,7 +51,7 @@ export default function Proba() {
 
 	useEffect(() => {
 		wss.current = new WebSocket(
-			"wss://bingo-frontend-iku9k.ondigitalocean.app/bingo-websocket"
+			"ws://localhost:8081/"
 		);
 		wss.current.onopen = () => console.log("ws opened");
 		wss.current.onclose = () => console.log("ws closed");

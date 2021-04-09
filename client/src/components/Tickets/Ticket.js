@@ -18,14 +18,12 @@ export default function Ticket () {
 
     return (
         <Fragment>
-            <div> HELLO TICKETS </div>
-            <div >
+            <div className='all-tickets-container'>
                 {tickets && tickets.map(element => {
-                     console.log(element.stake, element.game );
-                    return  <div>
-                        <div> {element.selectedNumbers.map( e => <p> {e} </p>) }</div>
+                    return  <div className='ticket-container'>
+                        <div className='selected-numbers'> {element.selectedNumbers.map( e => <div> {e} </div>) }</div>
                          <div>$ {element.stake}</div>
-                         <div>Game ID: {element.game}</div>
+                         <div> Game ID: {element.game}</div>
                      </div>
                 }) }
             </div>

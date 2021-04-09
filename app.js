@@ -40,6 +40,6 @@ app.use((err, req, res, next) => {
 	errorHandler(err, res);
 });
 
-app.listen(5000, () => console.log("Server is running"));
+app.listen(8888, () => console.log("Server is running"));
 
 module.exports = app;

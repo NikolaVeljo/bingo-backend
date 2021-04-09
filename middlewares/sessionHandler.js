@@ -1,15 +1,14 @@
 const session = require("express-session");
-const connectRedis = require("connect-redis");
-const redisClient = require("../db/redis");
-
-const RedisStore = connectRedis(session);
+var MongoDBStore = require('connect-mongodb-session')(session);
 
 const sessionObject = {
-	store: new RedisStore({
-		client: redisClient,
+	store : new MongoDBStore({
+		uri: process.env.MONGO_URL,
+		databaseName: 'database',
+		collection: 'sessions'
 	}),
 	name: "session",
-	secret:process.env.REDIS_SECRET,
+	secret:process.env.MONGO_SECRET,
 	saveUninitialized: false,
 	resave: false,
 	rolling: true,

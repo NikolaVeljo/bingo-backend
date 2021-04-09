@@ -1,12 +1,12 @@
 import * as actionType from "./type";
 import API from "../../API";
 import toast from 'react-hot-toast';
-// import { browserHistory } from 'react-router'
 import { useHistory } from "react-router-dom";
 
 
 export const checkAuthState = async (dispatch) => {
 	try {
+		console.log('hi')
 		dispatch({
 			type: actionType.CHECKING_AUTH_STATE_BEGINS,
 		});
@@ -15,6 +15,7 @@ export const checkAuthState = async (dispatch) => {
 
 		if (csrf) {
             const response = await API.get("/get-user");
+			console.log(response);
             
 			dispatch({
 				type: actionType.CHECKING_AUTH_STATE_SUCCESS,
@@ -37,10 +38,13 @@ export const checkAuthState = async (dispatch) => {
 		}
 	} catch (e) {
 		let error;
+
+		console.log(e)
 		if (e.response) {
 			error = e.response.data.message;
-			if (e.response.data.code === 401) {
+			if (e.response.data.code === 401) {				
 				localStorage.removeItem("csrf");
+				signout();
 			}
 		} else {
 			error = "Server is down";

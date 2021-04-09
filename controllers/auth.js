@@ -7,8 +7,11 @@ const User = require("../models/user");
 const sendEmail = require("../services/emailHandler");
 
 const signIn = asyncHandler(async (req, res) => {
+
 	const { email, password } = req.body;
-	
+
+	console.log(req)
+
 	if (!email || !password) {
 		throw new ErrorHandler(400, "Please fill in all fields");
 	}

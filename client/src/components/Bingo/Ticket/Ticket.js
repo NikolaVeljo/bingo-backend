@@ -34,7 +34,7 @@ export default function Ticket() {
 			sing.classList.remove("selected");
 		}
 
-		dispatch(getTickets());
+		//dispatch(getTickets());
 		
 	};
 
